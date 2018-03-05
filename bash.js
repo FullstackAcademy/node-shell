@@ -10,7 +10,10 @@ process.stdin.on('data', function (data) {
   // console.log(cmdList)
   var output = null
   var input = cmdList[0].split(' ')[1]
+  var splitCmd = cmdList[0].split(' ')[0]
   for (let i = 0; i < cmdList.length; i++) {
+
+    output = commands[splitCmd](input, done);
     // if (cmdList[i].indexOf(' ') === -1) {
     //   console.log(cmdList[i])
     // } else {
@@ -43,6 +46,10 @@ process.stdin.on('data', function (data) {
 });
 
 var done = function(output) {
-  console.log(output)
+  if (cmdList.length > 1) {
+    return output
+  } else {
+    console.log(output)
+  }
   process.stdout.write('\nprompt > ');
 }
